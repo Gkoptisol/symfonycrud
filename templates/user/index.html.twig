@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contacts{% endblock %}
+
+{% block body %}
+    {% if users %}
+    <h1 style="text-align:center">Contacts</h1>
+            <div style="text-align:center"><button ><a href="/new" class="btn btn-primary">Add new Contact</a></button></div>
+        <div style="text-align:right">
+        <table id="users" class="table table-striped" center>
+            <thead>            
+            <tr class="lead">
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    
+                    <td>
+                        <a href="/{{ user.id }}" class="btn btn-primary">Show</a>
+                        <a href="/edit/{{ user.id }}" class="btn btn-secondary" data-id="{{ user.id }}">Edit</a>
+                        <a href="/delete/{{ user.id }}" class="btn btn-danger delete-user" data-id="{{ user.id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+    {% else %}
+        <p>No users to display</p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+{% endblock %}
